@@ -304,6 +304,7 @@
       border-radius: 8px;
       overflow: hidden;
       max-height: 420px;
+      cursor: pointer;
     }
     .hero-photo img {
       width: 100%;
@@ -312,24 +313,16 @@
       object-position: center 30%;
       display: block;
       filter: grayscale(15%);
+      transition: filter 0.3s;
     }
-    .hero-photo-label {
-      position: absolute;
-      bottom: 1rem;
-      left: 1rem;
-      font-family: var(--mono);
-      font-size: 12px;
-      background: rgba(26,25,23,0.75);
-      color: #f5f4f0;
-      padding: 0.35rem 0.7rem;
-      border-radius: 4px;
-      backdrop-filter: blur(4px);
-    }
+    .hero-photo:hover img { filter: grayscale(0%); }
+
     .about-photo {
       margin-top: 2.5rem;
       position: relative;
       border-radius: 8px;
       overflow: hidden;
+      cursor: pointer;
     }
     .about-photo img {
       width: 100%;
@@ -338,8 +331,15 @@
       object-position: left 20%;
       display: block;
       filter: grayscale(10%);
+      transition: filter 0.3s;
     }
-    .about-photo-label {
+    .about-photo:hover img { filter: grayscale(0%); }
+
+    /* hover hint */
+    .photo-hint {
+      display: none;
+    }
+    .photo-label {
       position: absolute;
       bottom: 1rem;
       left: 1rem;
@@ -351,6 +351,38 @@
       border-radius: 4px;
       backdrop-filter: blur(4px);
     }
+
+    /* highlight box — hidden by default, shown on hover */
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .highlight-box {
+      position: absolute;
+      border: 2.5px solid #f5f4f0;
+      border-radius: 6px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.08);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .highlight-label {
+      position: absolute;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      background: rgba(26,25,23,0.85);
+      color: #f5f4f0;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s;
+      backdrop-filter: blur(4px);
+    }
+    .hero-photo:hover .highlight-box,
+    .hero-photo:hover .highlight-label,
+    .about-photo:hover .highlight-box,
+    .about-photo:hover .highlight-label { opacity: 1; }
 
     /* ── Animations ── */
     .fade-in {
@@ -405,7 +437,11 @@
       </div>
       <div class="hero-photo fade-in">
         <img src="me2.jpg" alt="Muratkhan speaking at an event" />
-        <span class="hero-photo-label">← that's me, speaking at an event</span>
+        <span class="photo-label">← that's me, speaking at an event</span>
+        <div class="photo-overlay">
+          <div class="highlight-box" style="left: 42%; top: 5%; width: 22%; height: 90%;"></div>
+          <div class="highlight-label" style="left: 42%; top: 6%;">← that's me</div>
+        </div>
       </div>
     </section>
 
@@ -460,7 +496,11 @@
 
       <div class="about-photo fade-in">
         <img src="me.jpg" alt="Muratkhan at an event" />
-        <span class="about-photo-label">← me, at a school event in Radom</span>
+        <span class="photo-label">← me, at a school event in Radom</span>
+        <div class="photo-overlay">
+          <div class="highlight-box" style="left: 3%; top: 3%; width: 38%; height: 94%;"></div>
+          <div class="highlight-label" style="left: 3%; top: 4%;">that's me →</div>
+        </div>
       </div>
     </section>
 
